@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/users'
+const baseUrl = 'https://would-you-rather-api-server.herokuapp.com/api/users'
 
 const getAll = async ()  => {
   const response = await axios.get<user[]>(baseUrl)
