@@ -2,4 +2,4 @@ export * as userService from './users'
 export * as loginService from './login'
 export * as questionService from './questions'
 
-export { setAuthToken, clearAuthToken } from './helpers'
+export { getAuthToken, setAuthToken, getAuthedUser, setAuthedUser, clearAuthedUser } from './helpers'

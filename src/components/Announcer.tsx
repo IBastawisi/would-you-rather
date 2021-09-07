@@ -1,31 +1,20 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../slices';
 import { RootState } from '../store';
+import Snackbar from '@mui/material/Snackbar';
 
 function Announcer() {
   const announcement = useSelector((state: RootState) => state.app.announcement);
-  const [timeoutId, setTimeoutId] = useState<number>()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (announcement) {
-      if (timeoutId) {
-        clearTimeout(timeoutId)
-      }
-      setTimeoutId(window.setTimeout(() => dispatch(actions.app.clearAnnouncement()), 3000))
-    }
-    return () => {
-      clearTimeout(timeoutId)
-      setTimeoutId(undefined)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [announcement])
+  const handleClose = () => dispatch(actions.app.clearAnnouncement());
 
-  if (!announcement) {
-    return null
-  }
-  return <div>{announcement}</div>
+  return <Snackbar
+    open={announcement !== null}
+    autoHideDuration={3000}
+    onClose={handleClose}
+    message={announcement}
+  />
 }
 
 export default Announcer;

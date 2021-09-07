@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { loginService, questionService, setAuthToken, userService } from '../services';
+import { getAuthedUser, loginService, questionService, setAuthToken, userService } from '../services';
 
 export interface AppState {
   authedUser: authedUser | null;
@@ -18,9 +18,8 @@ export const loadAsync = createAsyncThunk('app/load', async (_, thunkAPI) => {
   thunkAPI.dispatch(showLoading())
   const response = await Promise.all([userService.getAll(), questionService.getAll()]);
   thunkAPI.dispatch(hideLoading())
-
-  const authedUserJSON = window.localStorage.getItem('authedUser')
-  const authedUser: authedUser = authedUserJSON && JSON.parse(authedUserJSON);
+  const authedUser = getAuthedUser();
+  setAuthToken(authedUser?.token);
 
   return { users: response[0], questions: response[1], authedUser };
 });
