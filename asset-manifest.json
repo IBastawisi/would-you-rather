@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/would-you-rather/static/css/main.e01d4c3c.chunk.css",
+    "main.js": "/would-you-rather/static/js/main.c7e1fcd0.chunk.js",
+    "main.js.map": "/would-you-rather/static/js/main.c7e1fcd0.chunk.js.map",
+    "runtime-main.js": "/would-you-rather/static/js/runtime-main.d93a18a4.js",
+    "runtime-main.js.map": "/would-you-rather/static/js/runtime-main.d93a18a4.js.map",
+    "static/js/2.3ddfbcf4.chunk.js": "/would-you-rather/static/js/2.3ddfbcf4.chunk.js",
+    "static/js/2.3ddfbcf4.chunk.js.map": "/would-you-rather/static/js/2.3ddfbcf4.chunk.js.map",
+    "index.html": "/would-you-rather/index.html",
+    "static/css/main.e01d4c3c.chunk.css.map": "/would-you-rather/static/css/main.e01d4c3c.chunk.css.map",
+    "static/js/2.3ddfbcf4.chunk.js.LICENSE.txt": "/would-you-rather/static/js/2.3ddfbcf4.chunk.js.LICENSE.txt",
+    "static/media/404.f7f74b0b.svg": "/would-you-rather/static/media/404.f7f74b0b.svg",
+    "static/media/logo.b2e5a01e.svg": "/would-you-rather/static/media/logo.b2e5a01e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d93a18a4.js",
+    "static/js/2.3ddfbcf4.chunk.js",
+    "static/css/main.e01d4c3c.chunk.css",
+    "static/js/main.c7e1fcd0.chunk.js"
+  ]
+}
