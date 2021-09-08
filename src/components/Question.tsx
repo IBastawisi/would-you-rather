@@ -15,6 +15,7 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import NotFound from './NotFound';
 
 const Question: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,8 +25,11 @@ const Question: React.FC<{ id: string }> = ({ id }) => {
 
   const authedUser = useSelector((state: RootState) => state.app.authedUser)
   const question = useSelector((state: RootState) => state.questions[id])
-  const questionAuthor = useSelector((state: RootState) => state.users[question.author])
+  const questionAuthor = useSelector((state: RootState) => state.users[question?.author])
 
+  if (!question) {
+    return <NotFound />
+  }
   let userAnswer: answer | null = null;
   if (authedUser) {
     userAnswer = question.optionOne.votes.includes(authedUser.username) ? "optionOne" :

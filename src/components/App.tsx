@@ -14,6 +14,7 @@ import NewQuestion from './NewQuestion';
 import Announcer from './Announcer';
 import NotFound from './NotFound';
 import Box from '@mui/system/Box';
+import Splash from './Splash';
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,11 +25,11 @@ const App: React.FC = () => {
   }, [dispatch])
 
   return (
-    <Router basename="/would-you-rather">
+    <Router>
       <LoadingBar />
       <Announcer />
       <Navbar />
-      {loading ? <div className="spinner"></div> :
+      {loading ? <Splash /> :
         <Box sx={{ pb: 7 }}>
           <Switch>
             <Route path='/' exact component={Dashboard} />

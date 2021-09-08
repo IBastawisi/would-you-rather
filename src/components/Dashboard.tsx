@@ -7,6 +7,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
 
 function Dashboard() {
   const questionIds = useSelector((state: RootState) => Object.keys(state.questions)
@@ -23,10 +24,11 @@ function Dashboard() {
     unansweredIds = unansweredIds.filter(id => !answeredIds.includes(id))
   }
 
-  const [value, setValue] = useState(authedUser ? '2' : '1');
+  const [value, setValue] = useState(authedUser && questionIds.length > 0 ? '2' : '1');
 
   useEffect(() => {
-    authedUser ? setValue('2') : setValue('1');
+    authedUser && questionIds.length > 0 ? setValue('2') : setValue('1');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authedUser])
 
   return (
@@ -34,21 +36,21 @@ function Dashboard() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <TabList centered onChange={(event, newValue) => { setValue(newValue); }}>
           <Tab label="All Questions" value="1" />
-          {authedUser && <Tab label="Unanswered Questions" value="2" />}
-          {authedUser && <Tab label="Answered Questions" value="3" />}
+          {authedUser && questionIds.length > 0 && <Tab label="Unanswered Questions" value="2" />}
+          {authedUser && questionIds.length > 0 && <Tab label="Answered Questions" value="3" />}
         </TabList>
       </Box>
       <TabPanel value="1" sx={{ p: 0 }}>
         {questionIds.map(id => <Question key={id} id={id} />)}
-        {questionIds.length === 0 && <p>There's NO Questions Yet!</p>}
+        {questionIds.length === 0 && <Typography component="h3" align="center" sx={{ p: 3 }}>There's NO Questions Yet!</Typography>}
       </TabPanel>
-      {authedUser && <TabPanel value="2" sx={{ p: 0 }}>
+      {authedUser && questionIds.length > 0 && <TabPanel value="2" sx={{ p: 0 }}>
         {unansweredIds.map(id => <Question key={id} id={id} />)}
-        {unansweredIds.length === 0 && <p>You Answered All Questions!</p>}
+        {unansweredIds.length === 0 && <Typography component="h3" align="center" sx={{ p: 3 }}>You Answered All Questions!</Typography>}
       </TabPanel>}
-      {authedUser && <TabPanel value="3" sx={{ p: 0 }}>
+      {authedUser && questionIds.length > 0 && <TabPanel value="3" sx={{ p: 0 }}>
         {answeredIds.map(id => <Question key={id} id={id} />)}
-        {answeredIds.length === 0 && <p>NO Answers?!</p>}
+        {answeredIds.length === 0 && <Typography component="h3" align="center" sx={{ p: 3 }}>NO Answers?!</Typography>}
       </TabPanel>}
     </TabContext>
   );

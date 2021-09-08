@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getAuthToken } from './helpers';
 
-const baseUrl = 'https://would-you-rather-api-server.herokuapp.com/api/questions'
+const baseUrl = 'https://would-you-rather-server.herokuapp.com/api/questions'
 
 const getAll = async () => {
   const response = await axios.get<question[]>(baseUrl)
