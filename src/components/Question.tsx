@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { actions } from '../slices';
 import { AppDispatch, RootState } from '../store';
 import { formatDate } from '../utils/helpers';
@@ -20,6 +20,7 @@ import NotFound from './NotFound';
 const Question: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useDispatch<AppDispatch>();
   const history = useHistory()
+  const location = useLocation()
   const params = useParams<{ id: string }>();
   if (params.id) id = params.id;
 
@@ -27,9 +28,13 @@ const Question: React.FC<{ id: string }> = ({ id }) => {
   const question = useSelector((state: RootState) => state.questions[id])
   const questionAuthor = useSelector((state: RootState) => state.users[question?.author])
 
+  if (params.id && !authedUser) {
+    return <Redirect to={{ pathname: "/login", state: { referrer: location.pathname } }} />
+  }
   if (!question) {
     return <NotFound />
   }
+
   let userAnswer: answer | null = null;
   if (authedUser) {
     userAnswer = question.optionOne.votes.includes(authedUser.username) ? "optionOne" :
@@ -44,7 +49,7 @@ const Question: React.FC<{ id: string }> = ({ id }) => {
       history.push(`/questions/${id}`)
     } else {
       dispatch(actions.app.announce("Please login to vote!"))
-      history.push('/login')
+      history.push('/login', { referrer: `/questions/${id}` })
     }
   }
 

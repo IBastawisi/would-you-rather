@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 import { actions } from '../slices';
 import { AppDispatch, RootState } from '../store';
 import Box from '@mui/material/Box';
@@ -13,6 +13,7 @@ function Leaderboard() {
   const authedUser = useSelector((state: RootState) => state.app.authedUser)
   const users = useSelector((state: RootState) => state.users)
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation()
 
   useEffect(() => {
     if (!authedUser) {
@@ -21,7 +22,7 @@ function Leaderboard() {
   }, [authedUser, dispatch])
 
   if (!authedUser) {
-    return <Redirect to="/login" />
+    return <Redirect to={{ pathname: "/login", state: { referrer: location.pathname } }} />
   }
 
   const sorted = Object.keys(users)

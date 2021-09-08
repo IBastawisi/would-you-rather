@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { actions } from '../slices'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
@@ -14,6 +14,7 @@ const LoginForm = () => {
   const [user, setUser] = useState({ username: '', password: '' })
   const dispatch = useDispatch()
   const history = useHistory()
+  const location = useLocation<{ referrer: string | undefined }>()
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -27,7 +28,7 @@ const LoginForm = () => {
       dispatch(actions.app.announce(response.payload?.error || response.error.message))
     } else {
       setUser({ username: '', password: '' })
-      history.push('/')
+      history.push(location.state?.referrer || '/')
     }
   }
 

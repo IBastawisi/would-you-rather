@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { actions } from '../slices';
 import { AppDispatch, RootState } from '../store';
 import Avatar from '@mui/material/Avatar';
@@ -15,6 +15,7 @@ const NewQuestion: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const authedUser = useSelector((state: RootState) => state.app.authedUser)
   const history = useHistory()
+  const location = useLocation()
 
   const [newQuestion, setNewQuestion] = useState({
     optionOne: '',
@@ -44,7 +45,7 @@ const NewQuestion: React.FC = () => {
   }, [authedUser, dispatch])
 
   if (!authedUser) {
-    return <Redirect to="/login" />
+    return <Redirect to={{ pathname: "/login", state: { referrer: location.pathname } }} />
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { actions } from '../slices';
