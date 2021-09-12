@@ -26,6 +26,7 @@
     "typescript": "~4.1.5"
   },
   "proxy": "http://localhost:3001",
+  "homepage": "https://ibastawisi.github.io/would-you-rather/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

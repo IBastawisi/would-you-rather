@@ -8,7 +8,6 @@ In your app, users will be able to answer questions, see which questions they ha
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 * run a production build with `npm run build`
-* or visit https://would-you-rather-ibastawisi.vercel.app to see it in action
 
 ## Important
 The [backend API](https://github.com/IBastawisi/would-you-rather-server) is a Simple CRUD app built with Node, Express, and MongoDB.
